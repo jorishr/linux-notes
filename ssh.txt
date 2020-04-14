@@ -1,0 +1,178 @@
+#############################
+II.	SECURE SHELL HOST (SSH)
+#############################
+
+Secure Shell Host: access the command line of a remote host.
+
+	ssh <username>@<ip or serveraddress>
+	exit
+
+TRANSFER FILES WITH SFTP
+
+ftp use port 21, transfers files as packets of text that can be read.
+
+sftp is the secure file transfer protocol, with secure login as in ssh:
+
+	sftp <user>@<serveraddress>
+
+	ls	// list of files and dirs on remote server
+	lls	// list of files in the local dir
+
+	put sample.txt	// transfer TO server
+	get sample.txt 	// transfer FROM server to local machine
+
+
+##############################
+III.	SETUP A LOCAL SSH SERVER
+##############################
+
+	install openssh-server
+
+	sudo systemctl restart ssh
+
+// edit port number, AllowUsers <username>
+
+	sudo nano /etc/ssh/sshd_config 
+
+	ssh <username>@<local ip> 
+
+// NOTE: you will have to setup port forwarding in the router for this to work
+
+
+
+
+###
+SSH
+#####################################
+I.	ABOUT
+II.	AUTHENTICATION METHODS
+III.	RSYNC AND SECURE COPY TO SERVER
+IV.	GITHUB SSH
+V. 	SERVER-SIDE SSH SETUP
+VI.	SSH AUTENTENTICATION CLIENT
+VII.	SSH CHEAT SHEET 
+#####################################
+
+###########
+I. 	ABOUT
+###########
+
+Secure Shell: cryptographic network protocol that allows for secure services over unsecure networks between client and server.
+
+OpenSSH is the default windows SSH client.
+
+To access a remote computer it needs to be running a SSHD service, or SSH Daemon. A daeamon is computer program that runs a background process.
+
+SSH breaks the data into packages of which the payload or data and padding is encrypted. The only thing visible is the package length and auth info. 
+
+############################
+II.	AUTHENTICATION METHODS
+############################
+
+- password (default)
+
+	ssh <username>@<ipaddress server>
+
+- public/private key pair
+	
+	ssh-keygen
+	// -> ~/.ssh/id_rsa_<id>		(private key)
+	// -> ~/.ssh/id_rsa_<id>.pub	(public key)
+
+cat ~/.ssh/id_rsa_xxx		// read out key in terminal
+cat id_rsa.pub | pbcopy	// idem + copy to clipboard
+
+The public key is put onto the server in the folder ~/.ssh/autorized_keys
+
+
+NOTES
+ 
+- every key that is added, is linked to the specific user. Thus if you start out in setup with root user, you will have to repeat the process of adding the public key to other users you create.
+
+- knownhosts: a configfile that contains the ip's or mac address of known hosts that are allowed to login
+
+- WINDOWS: you may to manually add the new key as identity:
+	ssh-add <keyName>
+
+###############
+III.	RSYNC/SCP
+###############
+
+Copy all of the files from the local directory to a folder on the remote server:
+
+rsync -av . <usr>@<domain>:~/<serverDestFolder>
+
+Delete a file and run rsync again, and it only copies the one mising file.
+
+Secure copy to server:
+
+scp <localFile> <user>@<serverIP>:~/serverFolder
+
+######################
+IV.	SETUP GITHUB SSH
+######################
+
+Locally generate ssh keys with ssh-keygen and add identity to ssh-agent (windows gitBash only)
+	
+	ssh-keygen
+	ssh-add ~/.ssh/id_rsa_xxx
+
+Next, add the public key to github account.
+
+
+VIEW REPOS
+
+	curl -i -H 'Authorization: token 	<token>' 	https://api.github.com/user/repos
+
+CREATE NEW REPO
+
+	curl -i -H 'Authorization: token {acces token}'
+		-d '{"name":"<>","auto_init":"true", 					"gitignore_template":"Node","private":"true"}'
+		https://api.github.com/user/repos
+
+DELETE REMOTE REPO
+
+	curl -X DELETE -H 'Authorization: token {acces token}' 		https://api.github.com/repos/{username}/{repo}
+
+NOTE: See local bash scripts that have been configured to make this easier.
+
+########################
+V. SERVER-SIDE SSH SETUP
+########################
+
+A. CREATE A NEW USER AND DISABLE ROOT LOGIN
+
+- ssh into server using root account
+
+adduser <username>	// add new ssh user
+usermod -aG sudo <username>
+id <username> 		// -> check user info
+
+sudo nano /etc/ssh/sshd_config
+	
+	PermitRootLogin no
+	PasswordAuthentication no
+
+sudo systemctl reload sshd
+
+B. ADD PUBLIC KEY TO USER:
+
+mkdir .ssh 
+touch authorized_keys
+nano authorized_keys
+copy locally generated public key from user
+
+#################################
+VI.	SSH AUTENTENTICATION CLIENT
+#################################
+
+On remote servers or windows you may have to activate the authentication client:
+
+	eval `ssh-agent -s`
+
+You can use an authentication client to manage passwords attached to ssh keys.
+
+#####################
+VII.	SSH CHEAT SHEET
+#####################
+https://gist.github.com/bradtraversy/f03df587f2323b50beb4250520089a9e

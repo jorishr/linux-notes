@@ -1,0 +1,71 @@
+---SETTING UP LOCAL DEVELOPMENT ENVIRONMENT IN LINUX---
+
+#######
+GENERAL
+####### 
+- Terminator cli
+- Studio Visual code
+- Filezilla
+
+##########
+LAMP STACK
+##########
+
+I. APACHE, II. MYSQL, III. PHP
+
+I.	APACHE SERVER
+
+INSTALL
+
+	sudo apt-get install apache2
+
+	// restart the apache server
+
+	systemctl restart apache2
+
+	sudo /etc/init.d/apache2 restart 
+
+WEBROOT LOCATION
+
+	var/www/html
+
+	touch index.html
+	
+	localhost/index.html 	// test in browser
+
+NGINX
+
+An alternative would be to use the NGINX server. You can combine both: 
+
+https://hostadvice.com/how-to/how-to-configure-nginx-and-apache-together-in-ubuntu/
+
+
+II.	PHP
+
+For Apache web server users, you�ll install libapache2-mod-php as a dependency. But for Nginx users, you�ll install PHP 7.3-FPM instead.
+
+	sudo apt-get install php	// installs latest stable version	
+
+To install PHP 7.3 you�ll need to use a third-party repository.
+
+Switch between PHP versions:
+
+	sudo a2dismod phpX.X ; 
+	sudo a2enmod phpX.X ; 
+	sudo service apache2 restart
+
+	sudo ln -sfn /usr/bin/phpX.X /etc/alternatives/php	
+	// check dir for exact version
+
+	systemctl restart apache2
+
+Reference: 
+	https://connectwww.com/how-to-install-and-configure-	apachephpmysql-and-phpmyadmin-on-ubuntu/727/
+
+
+III. MYSQL
+
+	apt-get install mysql-server 	// install
+
+	See mysql doc for further instruction on setup.
+	Use phpMyAdmin for easy database management.

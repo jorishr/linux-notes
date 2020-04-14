@@ -1,0 +1,71 @@
+###################
+SSL ON UBUNTU+NGINX
+############################
+I.	LET's ENCRYPT
+II.	COMMERCIAL CERTIFICATE
+############################
+
+###################
+I.	LET'S ENCRYPT 
+###################
+
+REFERENCE:
+https://www.digitalocean.com/community/tutorials/how-to-
+secure-nginx-with-let-s-encrypt-on-ubuntu-18-04
+
+INSTALL CERTBOT
+
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt install python-certbot-nginx
+sudo systemctl reload nginx
+sudo ufw allow 'Nginx Full'
+sudo ufw delete allow 'Nginx HTTP'
+
+Certbot needs to be able to find the correct server block in your Nginx configuration for it to be able to automatically configure SSL. 
+
+Specifically, it does this by looking for a server_name directive that matches the domain you request a certificate for.
+
+Find the server name in your sites-available config file.
+
+Update the firewall settings.
+
+OBTAIN THE CERTIFICATE
+
+Run the certbot with the --nginx plugin, using -d to specify the names we’d like the certificate to be valid for.
+
+sudo certbot --nginx -d example.com -d www.example.com
+
+
+AUTO-RENEWAL
+
+Let’s Encrypt’s certificates are only valid for ninety days. This is to encourage users to automate their certificate renewal process. 
+
+The certbot package we installed takes care of this for us by adding a renew script to /etc/cron.d. 
+
+sudo certbot renew --dry-run
+
+
+############################
+II.	COMMERCIAL CERTIFICATE
+############################
+
+Create a PRIVATE KEY through third party certificate issuing website. 
+
+NOTE: use www.mywebsite.com
+
+Create a file private key file.
+Create a bundle file with, in order:
+- certificate
+- CA
+- Issuer Authority
+
+NGINX SETUP
+
+In site-available you have the path for:
+
+ssl_certificate    	/etc/ssl/private/ssl-bundle.crt;
+ssl_certificate_key  	/etc/ssl/private/goudster.key;
+
+Put both files in the respective location and restrict access to root.
+
+restart nginx: sudo systemctl restart nginx

@@ -1,0 +1,51 @@
+###################
+VII.	SHELL SCRIPTS
+###################
+
+To run a shell script file .sh file: 
+
+	bash <fileName>
+
+NOTE: the file has to be made executable through file permission:
+	
+	chmod 7xx 
+
+EXAMPLE FILE CONTENT:
+#!/bin/sh
+#
+#Comment: the first line indicate the following has to be run 
+# 			in the terminal
+mkdir -p /app/assets/{images,styles,js}
+touch project/app/assets/index.html project/app/assets/styles/main.css project/app/assets/js/main.js
+git init
+
+Uefull applications: automate the cloning of an existing Github repo, and setting up a standard folder structure for a new project with a copy of a template html
+
+REFERENCE:
+
+https://www.codementor.io/celestine_eo/getting-started-with-bash-scripting-for-web-developers-rlufh8cdx
+
+
+#############
+VIII.	ALIASES
+#############
+
+nano ~/.bash_profile		// here are all the aliases stored
+
+alias					// shows existing aliases in cli
+
+###############
+IX.	VARIABLES
+###############
+
+// Create a new variable
+	<VARNAME>=value		
+	MYNAME=Joris
+
+	echo $MYNAME	// -> Joris
+
+A long filename or path can be stored as variable:
+
+	FILE=/test/hello/world/1.txt
+
+	cat $FILE		// -> content of file
