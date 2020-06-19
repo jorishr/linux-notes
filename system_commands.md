@@ -1,7 +1,9 @@
 # Basic Linux System Commands
-1. Processes and services
-2. Linux version info
-3. Disk and device properties
+Table of contents
+- [Basic Linux System Commands](#basic-linux-system-commands)
+  - [1. Processes and Services](#1-processes-and-services)
+  - [2. Linux Version Info](#2-linux-version-info)
+  - [3. Disk and Device Properties](#3-disk-and-device-properties)
 
 ## 1. Processes and Services
 * List processes

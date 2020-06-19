@@ -1,4 +1,8 @@
 # Shell scripts
+- [Shell scripts](#shell-scripts)
+  - [1. Example](#1-example)
+  - [2. Aliases](#2-aliases)
+  - [3. Variables](#3-variables)
 ## 1. Example
 To run a shell script file .sh file: 
 `bash <fileName>`

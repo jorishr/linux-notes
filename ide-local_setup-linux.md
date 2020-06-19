@@ -1,7 +1,8 @@
 # Setting up a local development environment in Linux
-- General tools
-- LAMP stack
-- MERN stack
+- [Setting up a local development environment in Linux](#setting-up-a-local-development-environment-in-linux)
+  - [General tools](#general-tools)
+  - [LAMP stack](#lamp-stack)
+  - [MERN Stack](#mern-stack)
 
 ## General tools
 - Terminator cli

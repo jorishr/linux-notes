@@ -1,9 +1,11 @@
 # Secure Shell Host (SSH)
-1. About SSH
-2. Authentication methods
-3. Github SSH config
-4. Server SSH setup
-5. Secure file transfer
+Table of contents
+- [Secure Shell Host (SSH)](#secure-shell-host-ssh)
+  - [1. About SSH](#1-about-ssh)
+  - [2. Authentication methods](#2-authentication-methods)
+  - [3. Github configuration](#3-github-configuration)
+  - [4. Server SSH setup](#4-server-ssh-setup)
+  - [5. Secure File Transfer](#5-secure-file-transfer)
 ***
 
 ## 1. About SSH

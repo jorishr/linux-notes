@@ -1,4 +1,25 @@
 # Linux Filesystem Folder Structure
+Table of contents
+- [Linux Filesystem Folder Structure](#linux-filesystem-folder-structure)
+  - [/home](#home)
+  - [/bin](#bin)
+  - [/dev](#dev)
+  - [/etc](#etc)
+  - [/lib](#lib)
+  - [/media and /mnt](#media-and-mnt)
+  - [/opt](#opt)
+  - [/proc](#proc)
+  - [/root](#root)
+  - [/run](#run)
+  - [/snap](#snap)
+  - [/srv](#srv)
+  - [/sys](#sys)
+  - [/tmp](#tmp)
+  - [/usr](#usr)
+  - [/var](#var)
+
+## /home
+Hidden folders in the /home folder is where you can find configuration files for some applications and cache or desktop settings.
 
 ## /bin
 Contains the most basic binaries for basic functionality like the cat command to display the output of a file.
@@ -51,6 +72,3 @@ User application folder. These are not essential apps that can be reside in the 
 
 ## /var 
 Contains files and folders that are expected to grow in size. For example, log files.
-
-## Note
-Hidden folders in the /home folder is where you can find configuration files for some applications and cache or desktop settings.

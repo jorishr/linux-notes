@@ -1,7 +1,9 @@
 # Linux CLI: Pipes and Redirections
-1.  File descriptors
-2.  Pipes
-3.  Redirections
+Table of contents 
+- [Linux CLI: Pipes and Redirections](#linux-cli-pipes-and-redirections)
+  - [1.   File descriptors](#1-file-descriptors)
+  - [2.   Pipes](#2-pipes)
+  - [3.   Redirections](#3-redirections)
 
 ## 1.   File descriptors
 When a program wants to read or write a file it needs to request access to that file from the kernel. The kernel assigns three files descriptors to the program by default:

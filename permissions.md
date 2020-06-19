@@ -1,7 +1,9 @@
 # Users, Groups and Permissions
-1. List, create and delete users
-2. File and directory permissions
-3. File attributes
+Table of contents
+- [Users, Groups and Permissions](#users-groups-and-permissions)
+  - [1. List, create and delete users](#1-list-create-and-delete-users)
+  - [2. File and directory permissions](#2-file-and-directory-permissions)
+  - [3. File Attributes](#3-file-attributes)
 
 ## 1. List, create and delete users
 * List logged-in users and get current user id

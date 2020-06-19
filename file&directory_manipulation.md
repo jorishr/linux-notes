@@ -1,6 +1,8 @@
 # File and directory manipulation commands
-1. Directories
-2. Files
+Table of contents
+- [File and directory manipulation commands](#file-and-directory-manipulation-commands)
+  - [1. Directories](#1-directories)
+  - [2. File Operations](#2-file-operations)
 
 ## 1. Directories 
 * Create (nested) folders:

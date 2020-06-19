@@ -1,8 +1,12 @@
 # List, View/Edit, Find
-1. List
-2. View/Edit files
-3. Find/locate files
-4. Grep
+Table of contents
+- [List, View/Edit, Find](#list-viewedit-find)
+  - [1. List](#1-list)
+  - [2. View/Edit files](#2-viewedit-files)
+  - [3. Find/locate files](#3-findlocate-files)
+    - [Search files](#search-files)
+    - [Find and execute commands on result](#find-and-execute-commands-on-result)
+  - [4. Grep](#4-grep)
 
 ## 1. List
 * List files and folders
