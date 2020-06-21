@@ -12,6 +12,7 @@ Table of contents
 			- [Config file](#config-file)
 			- [Enable configuration](#enable-configuration)
 			- [Hash bucket memory problem](#hash-bucket-memory-problem)
+		- [Multiple domains point to same app](#multiple-domains-point-to-same-app)
 	- [Nginx Structure](#nginx-structure)
 		- [Nginx basic configuration](#nginx-basic-configuration)
 	- [Nginx server logs](#nginx-server-logs)
@@ -98,6 +99,10 @@ Open the file:
 
 Remove the `#` before the line: `server_names_hash_bucket_size 64;`
 
+### Multiple domains point to same app
+- create seperate server blocks for each domain
+- in those server blocks, point to the root folder of the main app
+- SSL: on my server I used the same certicate for all domains with certbot. Certbox than handles the upgrade to SSL.
 
 ## Nginx Structure
 ### Nginx basic configuration

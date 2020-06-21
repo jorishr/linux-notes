@@ -5,6 +5,7 @@ Table of contents
     - [Install Certbot](#install-certbot)
     - [Obtain the certificate](#obtain-the-certificate)
     - [Auto-renewal](#auto-renewal)
+    - [Expanding or editing existing certificate](#expanding-or-editing-existing-certificate)
   - [Adding a commercial certificate](#adding-a-commercial-certificate)
     - [Obtain certificate](#obtain-certificate)
     - [Setup in Nginx](#setup-in-nginx)
@@ -40,6 +41,11 @@ Let's Encrypt certificates are only valid for ninety days. This is to encourage 
 The certbot package we installed takes care of this for us by adding a renew script cronjob to `/etc/cron.d`. 
 
 To test it: `sudo certbot renew --dry-run`
+
+### Expanding or editing existing certificate
+To add a domain (sub domain or toplevel) to an existing certificate use: `certbot --expand -d existing.com,example.com,newdomain.com`. 
+
+To have full control over changes, including delete, use: `certbot --cert-name -d existing.com,example.com,newdomain.com`. 
 
 ## Adding a commercial certificate
 ### Obtain certificate
