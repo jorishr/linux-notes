@@ -72,3 +72,11 @@ mount /dev/sda3 /mnt
 ```
 The file responsible for automatic mount at boot is FSTAB in the /etc folder:
 `less /etc/fstab`
+
+* Check temperature of CPU and HDD
+To do so third party software is required: lm-sensors and hddtemp
+```
+sudo apt-get install lm-sensors hddtemp
+
+hddtemp /dev/sda
+```
