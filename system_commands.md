@@ -2,8 +2,10 @@
 Table of contents
 - [Basic Linux System Commands](#basic-linux-system-commands)
   - [1. Processes and Services](#1-processes-and-services)
-  - [2. Linux Version Info](#2-linux-version-info)
+  - [2. Linux Version and System Info](#2-linux-version-and-system-info)
   - [3. Disk and Device Properties](#3-disk-and-device-properties)
+  - [4. Terminal multiplexer](#4-terminal-multiplexer)
+  - [5. System and hardware information](#5-system-and-hardware-information)
 
 ## 1. Processes and Services
 * List processes
@@ -48,13 +50,37 @@ Using the path:
 sudo reboot
 sudo shutdown -h -<minutes>		//-> shutdown system in x minutes.
 sudo shutdown -c				//-> to cancel the previously set shutdown
+sudo shutdown -h //-> halt and power off the system
+sudo shutdown -h now //-> halt the system now instead of the default in 1 minute
+sudo shutdown -r //-> shutdown and reboot
 ```
 
-## 2. Linux Version Info
+## 2. Linux Version and System Info
 ```
 uname -a //-> full kernel version info for the system
 uname -v //-> version
 uname -r //-> release
+
+lsb_release -a  //-> ubuntu release version info
+
+cat /etc/os-release
+cat /etc/lsb_release
+#operating system release files in the /etc directory.
+
+hostnamectl
+#change hostname of the machine
+hostnamectl set-hostname [new name]
+
+date
+#or
+timedatectl
+#date is displayed in UTC
+
+sudo dpkg-reconfigure tzdata
+#or
+timedatectl list-timezones
+timedatectl set-timezone [timezone]
+#reconfigure timezone in the data package
 ```
 
 ## 3. Disk and Device Properties
@@ -79,4 +105,48 @@ To do so third party software is required: lm-sensors and hddtemp
 sudo apt-get install lm-sensors hddtemp
 
 hddtemp /dev/sda
+```
+
+## 4. Terminal multiplexer
+When connecting remotely via ssh the connection can be interrupted. By itself this is not a big issue. But when a shell is terminated all programs that were running in that shell are also interrupted. When doing important updates remotely an interruption can thus leave the system in a broken state.
+
+The mitigate this risk a terminal multiplexer is used via the command `tmux`. This opens up a virtual session on the server machine to which you can connect and disconnect at will. Thus when the connection is lost, the session continues and you can reattach to the existing session after re-connecting using the command `tmux attach`.
+
+Tmux is also useful to allow you to disconnect when you know a process will take a lot of time to complete.
+
+Screen is a similar application that allows you to do multitasking via the command line.
+
+## 5. System and hardware information
+* list all hardware devices
+```
+sudo lshw
+sudo lshw -businfo
+sudo lshw -businfo -c disk
+#show only businfo, device class (disk)
+```
+
+* list block storage devices
+This returns info about harddrives and loops devices, which are files that contain filesystem
+```
+lsblk
+blkid //-> additional info
+```
+
+* list memory and cpu info
+```
+lsmem -a
+lscpu
+
+cat /proc/cpuinfo
+#check cpuinfo file
+```
+* list other devices
+```
+lspci
+lspci -tv //-> tree view
+lspci -v  //-> detailled view
+
+lsusb
+lsusb -tv //-> tree view
+lsusb -v  //-> detailled view
 ```

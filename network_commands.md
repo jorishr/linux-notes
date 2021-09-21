@@ -28,12 +28,9 @@ TCP and UDP, listening, port, program name `netstat -tulpn`
 
 - Local Network Mapping: show which devices are on the network and which services do they offer
 ```
+nmap localhost      //-> shows which ports are open on the system
+
 nmap <ip>
 nmap -A <ip>		//-> additional info about the devices
 nmap -v <ip>		//-> verbose mode: more than standard info
-
-nmap <ip>-range 
-npmap 192.168.1.0-100
-
-nmap -iL ~/networks.txt			//-> scan in bulk with a .txt file
 ```
