@@ -6,6 +6,7 @@ Table of contents
   - [3. Disk and Device Properties](#3-disk-and-device-properties)
   - [4. Terminal multiplexer](#4-terminal-multiplexer)
   - [5. System and hardware information](#5-system-and-hardware-information)
+  - [Logs](#logs)
 
 ## 1. Processes and Services
 * List processes
@@ -107,6 +108,7 @@ sudo apt-get install lm-sensors hddtemp
 hddtemp /dev/sda
 ```
 
+
 ## 4. Terminal multiplexer
 When connecting remotely via ssh the connection can be interrupted. By itself this is not a big issue. But when a shell is terminated all programs that were running in that shell are also interrupted. When doing important updates remotely an interruption can thus leave the system in a broken state.
 
@@ -115,6 +117,7 @@ The mitigate this risk a terminal multiplexer is used via the command `tmux`. Th
 Tmux is also useful to allow you to disconnect when you know a process will take a lot of time to complete.
 
 Screen is a similar application that allows you to do multitasking via the command line.
+
 
 ## 5. System and hardware information
 * list all hardware devices
@@ -149,4 +152,28 @@ lspci -v  //-> detailled view
 lsusb
 lsusb -tv //-> tree view
 lsusb -v  //-> detailled view
+```
+
+
+## Logs
+Classic text based logs can be found in `/var/log/` and are managed by `rsyslog`. There format can be programmatically read but can become overwhelming when there are many logs.
+Binary logs can be found accessed via `journalctl` command and are managed by `systemd-journald`, it is considered to be easier to query.
+```
+# system log
+less /var/log/syslog    //-> use 'f' or 'b' to move up or down; use '/' to search
+tail /var/log/syslog
+
+# dpkg log for history of installing and removing packages
+tail /var/log/dpkg.log
+
+# firewall log
+tail /var/log/ufw.log
+
+# specify the units to focus on by using journalctl
+journalctl -u 
+
+journalctl --since "10 minutes ago"
+journalctl --since "2021-09-22"
+
+journalctl -b  //-> since last boot
 ```
