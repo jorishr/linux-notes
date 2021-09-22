@@ -40,7 +40,12 @@ NOTES
 eval `ssh-agent -s`
 ssh-add <keyName>
 ```
+- set configuration options
+```
+sudo nano /etc/ssh/sshd.config
 
+//for example to allow or deny password login via ssh
+```
 ## 3. Github configuration
 - Locally generate ssh keys with ssh-keygen and add identity to ssh-agent (windows GitBash)
 ```
