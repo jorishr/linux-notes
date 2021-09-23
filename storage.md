@@ -1,4 +1,15 @@
 # Storage
+
+table of contents
+- [Storage](#storage)
+  - [Get info](#get-info)
+  - [Configuring a disk](#configuring-a-disk)
+    - [Create partitions with FDISK](#create-partitions-with-fdisk)
+    - [Create a file system](#create-a-file-system)
+    - [Setup user permission for new file system](#setup-user-permission-for-new-file-system)
+  - [Automatically mount devices](#automatically-mount-devices)
+  - [Redundant storage options](#redundant-storage-options)
+
 ## Get info
 ```
 # Check free disk space (all filesystems, human readable):
@@ -42,15 +53,22 @@ By default only root has the permission to modify the files. Add all users throu
 ```
 sudo chmod 777 /mnt/storage  
 ```
-## Mount a new device
-
-* Mount a new drive on the system:
-```
-mount		//-> show all mounted drives
-ls /mnt		//-> the folder where mounted devices live 
-mount /dev/sda3 /mnt
-```
 
 ## Automatically mount devices
-The file responsible for automatic mount at boot is FSTAB in the /etc folder:
+The file system table FSTAB is responsible for the automatic mount at boot 
 `less /etc/fstab`
+
+## Redundant storage options
+There are mainly two reasons for redundant storage: availability and protection against disk failure. Usually the system critical files are stored on one disk and the file sharing media live on the second and additional disk in an array. Speed is usually a minor concern. Fault tolerance requirements are more important because some files need to available all the time.
+
+Redundancy is not a backup. Usually a backup is stored away from the physical location on another device.
+
+There are various solutions available, each requires further in depth study.
+
+- RAID: Redundant Array of Independent Disks. This is the classic redundancy solution that is simple to implement. It uses *mirroring* to store the same data on at least two separate disks or *striping* to divide files over multiple volumes. RAID has various levels: level 0 is just a bunch of disks (jbod) and does not provide redundancy, it means that at least two disks are combined to form one volume and disk are filled progressively. Level 1 is mirroring. Etc. The software program used for this purpose is `mdadm`.
+
+- LVM is the Logical Volume Manager and offers a slightly more complex approach. Physical Volumes (PV) are grouped together in Volume Groups (VG). Logical Volumes (LV) are created within groups and can span over multiple physical disks. Moving the LV's around VG's and PV's can offer extra flexibility though it adds complexity.
+
+- ZFS combines a file system and a volume manager. Physical disks are combined into Virtual Devices (Vdev's). It uses copy-on-write (COW) and therefore is a populair choice for data protection as it can easily create and restore snapshots. An application for ZFS is the server OS FreeNAS.
+
+- B-Tree File System (BTFS). It is resilient against data corruption as it combines file integrity management with RAID features. It can be used on a single disk.
