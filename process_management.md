@@ -14,12 +14,21 @@ ps -ejHf
 
 ps -e | grep bash
 //-> get the process id of a process (here: bash)
+
+ps aux  //-> list of running processes, not real-time
+ps aux | grep apache2
+
+pgrep <service_name>    //-> list of all process id related to a service
 ```
 
 ## Signals
 Processes can respond to standard linux signals. These signals are codified with numbers. Use the command `kill -l´ to list these signals and there corresponding numbers. The most used is SIGKILL (9).
 ```
 kill -9 <process id>
+
+kill <process_id> <process_id> <process_id>
+
+killall <service_name> 
 ```
 
 ## Resource management
@@ -30,15 +39,17 @@ The check simple memory overview use `free -h` for human readable format.
 Use `df -h` for storage monitoring and `df -h /` to see just the root file system storage. To find large files: `sudo find / -size +500M`
 
 
-## services
+## Services
 Services are more advanced ways for dealing with processes. They add extra functionality so that you don't have to deal with each process individually. Webservers, database servers or ssh servers can deal with requests that are handled by various processes. Use `systemctl` to list all services and devices that are being tracked.
 ```
 systemctl status <name.service>
 
 # Example
+
 systemctl status rsyslog.service
 systemctl start rsyslog.service
 systemctl stop rsyslog.service
 systemctl enable rsyslog.service    //-> on boot
 systemctl disable rsyslog.service
 ```
+Or using the path of a service: `sudo /etc/init.d/<service_name> start`
