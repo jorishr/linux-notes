@@ -8,6 +8,7 @@ table of contents
     - [Create a file system](#create-a-file-system)
     - [Setup user permission for new file system](#setup-user-permission-for-new-file-system)
   - [Automatically mount devices](#automatically-mount-devices)
+  - [Monitor file storage activity](#monitor-file-storage-activity)
   - [Redundant storage options](#redundant-storage-options)
 
 ## Get info
@@ -55,8 +56,21 @@ sudo chmod 777 /mnt/storage
 ```
 
 ## Automatically mount devices
-The file system table FSTAB is responsible for the automatic mount at boot 
-`less /etc/fstab`
+The file system table FSTAB is responsible for the automatic mount at boot. 
+`/etc/fstab` is a configuration file that can be edited to adjust the options. Using the partition identifier is not a good choice because this might change due to detection order changes. Better to include the Universally Unique Identifier (UUID) that can be fetched and copied from `blkid`. Thus use: `/dev/disk/by-uuid/<uuid>`. Add the `nofail` options for USB drives so that the system can continue even if the USB fails.
+
+## Monitor file storage activity
+A program that can be used is `iotop` and can be used in combination with `sysstat/iostat`. The programs monitor input-output activity on devices.
+```
+sudo apt install iotop
+
+sudo apt install sysstat
+
+sudo iostat -h
+
+sudo hdparm -tTv /dev/sda
+//-> checks the read/write speed of the volume
+```
 
 ## Redundant storage options
 There are mainly two reasons for redundant storage: availability and protection against disk failure. Usually the system critical files are stored on one disk and the file sharing media live on the second and additional disk in an array. Speed is usually a minor concern. Fault tolerance requirements are more important because some files need to available all the time.
