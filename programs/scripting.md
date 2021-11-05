@@ -20,7 +20,7 @@ touch project/app/assets/index.html project/app/assets/styles/main.css project/a
 git init
 ```
 
-Usefull applications: automate the cloning of an existing Github repo and setting up a standard folder structure for a new project with a copy of a template html
+Useful applications: automate the cloning of an existing Github repo and setting up a standard folder structure for a new project with a copy of a template html
 
 [Reference guide](https://www.codementor.io/celestine_eo/getting-started-with-bash-scripting-for-web-developers-rlufh8cdx)
 

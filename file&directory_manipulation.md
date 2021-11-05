@@ -84,7 +84,7 @@ rm <filename>
 rm <filename> <filename> <filename>     //-> remove multiple files
 
 rm *.txt        //-> remove all txt files in the current folder
-rm file*        //-> remvove all files that start with ...
+rm file*        //-> remove all files that start with ...
 ```
 Operations in the current folder:
 ```

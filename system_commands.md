@@ -28,27 +28,34 @@ uname -a //-> full kernel version info for the system
 uname -v //-> version
 uname -r //-> release
 
-lsb_release -a  //-> ubuntu release version info
+lsb_release -a  //-> Linux Standard Base Release info (Ubuntu 18.04 LTS, Codename: Bionic)
+
+# Check operating system release files in the /etc directory:
 
 cat /etc/os-release
 cat /etc/lsb_release
-#operating system release files in the /etc directory.
+
+# Check host machine info
 
 hostnamectl
 
 #change hostname of the machine
+
 hostnamectl set-hostname [new name]
+
+# Check the date on the machine
+# Date is displayed in UTC
 
 date
 #or
 timedatectl
-#date is displayed in UTC
+
+# Adjust timezones in the data package
 
 sudo dpkg-reconfigure tzdata
 #or
 timedatectl list-timezones
 timedatectl set-timezone [timezone]
-#reconfigure timezone in the data package
 ```
 
 

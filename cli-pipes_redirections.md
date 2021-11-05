@@ -1,9 +1,9 @@
 # Linux CLI: Pipes and Redirections
 Table of contents 
 - [Linux CLI: Pipes and Redirections](#linux-cli-pipes-and-redirections)
-  - [1.   File descriptors](#1-file-descriptors)
-  - [2.   Pipes](#2-pipes)
-  - [3.   Redirections](#3-redirections)
+  - [1.   File descriptors](#1---file-descriptors)
+  - [2.   Pipes](#2---pipes)
+  - [3.   Redirections](#3---redirections)
 
 ## 1.   File descriptors
 When a program wants to read or write a file it needs to request access to that file from the kernel. The kernel assigns three files descriptors to the program by default:
@@ -13,7 +13,7 @@ When a program wants to read or write a file it needs to request access to that 
 
 The stdin takes in data and supplies it as input to a program. It functions as an interface so that the actual program does not need to account for where the input is generated from (keyboard, data from another program, other).
 
-Stdout and stderr both produce output (program data or error message) into the terminal by default but can redirected into seperately into files.
+Stdout and stderr both produce output (program data or error message) into the terminal by default but can redirected into separately into files.
 
 ## 2.   Pipes
 Run program1 and send stdout to stdin of program2 with anonymous pipe:
@@ -34,7 +34,7 @@ Run program1 and redirect stdout to output log file, stderr goes to error log fi
 Run program1 and redirect both stdout and stderr to the same output log file:
 `program1 > output.log 2>&1`
 
-To append the output data to a file instead of overwriting exisiting data use '>>':
+To append the output data to a file instead of overwriting existing data use '>>':
 `program1 >> output.log`
 
 * ### Input redirection
@@ -43,7 +43,7 @@ Run program1 with input.txt into stdin, stdout and stderr to terminal by default
 `cat input.txt | program1`
 Both programs produces the same result but the cat command and pipe adds an additional step.
 
-Run program1 with input.txt into stdin, stdout and stderr to seperate log files:
+Run program1 with input.txt into stdin, stdout and stderr to separate log files:
 `program1 < input.txt > output.log 2> error.log`
 
 * ### Named pipes

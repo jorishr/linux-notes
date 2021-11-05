@@ -13,7 +13,7 @@ table of contents
 
 ## Get info
 ```
-# Check free disk space (all filesystems, human readable):
+# Check free disk space (all file systems, human readable):
 df -ah
 
 # List all mounted devices (uuid of all drives and partitions): 

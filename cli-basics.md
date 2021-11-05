@@ -2,7 +2,7 @@
 * Command history
 ```
 history -c						//-> clear cli history 
-CTRL + R						//-> search commmand history
+CTRL + R						//-> search command history
 history | grep <command>		//-> show all related commands 
 history | less					//-> allows you to browse history
 ```

@@ -24,7 +24,7 @@ Add new user and set sudo privileges:
 adduser <user>
 
 usermod -aG sudo <user>	
-//-> -a for append, -G for list of groups, adds the user to the group "sudo" which is configured for admin priviliges
+//-> -a for append, -G for list of groups, adds the user to the group "sudo" which is configured for admin privileges
 ```
 ### UFW Firewall
 Once enabled the firewall will block access to all services, unless specified otherwise. 
@@ -48,7 +48,7 @@ See [Nginx Setup](nginx_setup.md).
 
 ## NodeJs Setup
 References: 
-- [Setup NodeJs app for production on Ubunto](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-18-04)
+- [Setup NodeJs app for production on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-18-04)
 - [Express_NodeJs Deployment](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/deployment)
 
 ### Install

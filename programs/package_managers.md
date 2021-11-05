@@ -1,6 +1,6 @@
 # Linux Package Managers
 
-## Advanced Packagae Tools (APT)
+## Advanced Package Tools (APT)
 - List and search apps
 ```
 apt list | less
@@ -13,7 +13,7 @@ apt-cache search --names-only ^php
 apt-cache policy <name>
 //-> check installed version of an application
 
-apt show <name> //-> show package detalled info
+apt show <name> //-> show package detailled info
 
 which <program>
 //-> find the path where the program is installed

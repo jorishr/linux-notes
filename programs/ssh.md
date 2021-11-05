@@ -9,11 +9,11 @@ Table of contents
 ***
 
 ## 1. About SSH
-Secure Shell: cryptographic network protocol that allows for secure services over unsecure networks between client and server.
+Secure Shell: cryptographic network protocol that allows for secure services over insecure networks between client and server.
 
 OpenSSH is the default windows SSH client.
 
-To access a remote computer it needs to be running a SSHD service, or SSH Daemon. A daeamon is computer program that runs a background process.
+To access a remote computer it needs to be running a SSHD service, or SSH Daemon. A daemon is computer program that runs a background process.
 
 SSH breaks the data into packages of which the payload or data and padding is encrypted. The only thing visible is the package length and auth info. 
 
@@ -30,7 +30,7 @@ ssh-keygen
 cat ~/.ssh/id_rsa_xxx		//-> read out key in terminal
 cat id_rsa.pub | pbcopy		//-> idem + copy to clipboard
 ```
-The public key is put onto the server in the folder ~/.ssh/autorized_keys
+The public key is put onto the server in the folder ~/.ssh/authorized_keys
 
 NOTES
 - Every key that is added is linked to the specific user. Thus if you start out in setup with root user, you will have to repeat the process of adding the public key to other users you create.

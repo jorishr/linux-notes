@@ -24,7 +24,7 @@ usermod -aG sudo jorishr
 //-> appends user to group sudo
 
 deluser <user> <group>
-//-> need to relogin to see effect
+//-> need to login again to see effect
 ```
 
 ## 2. File and directory permissions

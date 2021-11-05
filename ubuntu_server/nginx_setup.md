@@ -30,7 +30,7 @@ sudo apt install nginx
 ### Firewall setup
 Nginx registers itself as a service with the `ufw` upon installation, making it straightforward to allow Nginx access, `sudo ufw app list`.
 
-Nginx Full: This profile opens both port 80 (normal, unencrypted web traffic) and port 443 (TLS/SSL encrypted traffic), `sudo ufw allow 'Nginx <option>'`
+Nginx Full: This profile opens both port 80 (normal, un-encrypted web traffic) and port 443 (TLS/SSL encrypted traffic), `sudo ufw allow 'Nginx <option>'`
 
 ### Nginx status check
 
@@ -100,9 +100,9 @@ Open the file:
 Remove the `#` before the line: `server_names_hash_bucket_size 64;`
 
 ### Multiple domains point to same app
-- create seperate server blocks for each domain
+- create separate server blocks for each domain
 - in those server blocks, point to the root folder of the main app
-- SSL: on my server I used the same certicate for all domains with certbot. Certbox than handles the upgrade to SSL.
+- SSL: on my server I used the same certificate for all domains with certbot. Certbot than handles the upgrade to SSL.
 
 ## Nginx Structure
 ### Nginx basic configuration
@@ -121,7 +121,7 @@ Any Nginx errors will be recorded in the error log: `/var/log/nginx/error.log`.
 Reference video: [Client IP in Nginx](https://www.youtube.com/watch?v=4p1Zc8F29Lk&t=210s)
 
 ### Host
-The most important is HOST. A single server can host multiple websites. To direct the user to the correct one the HTTP REQUEST contains a HEADER with a HOST. It is the addresss in the address bar that gets encoded into the HOST HEADER.
+The most important is HOST. A single server can host multiple websites. To direct the user to the correct one the HTTP REQUEST contains a HEADER with a HOST. It is the address in the address bar that gets encoded into the HOST HEADER.
 
 In the LOCATION block of NGINX you will find the `proxy_set_header Host $host`;
 
