@@ -5,19 +5,18 @@ Table of contents
   - [2. Linux Version and System Info](#2-linux-version-and-system-info)
   - [3. System and hardware information](#3-system-and-hardware-information)
   - [4. Logs](#4-logs)
-  - [5. Terminal multiplexer](#5-terminal-multiplexer)
 
 ## 1. Shutdown and reboot
 ```
 sudo reboot
 
-sudo shutdown -h -<minutes>		//-> shutdown system in x minutes.
-
-sudo shutdown -c				      //-> to cancel the previously set shutdown
-
 sudo shutdown -h              //-> halt and power off the system
 
+sudo shutdown -h -<minutes>		//-> shutdown system in x minutes.
+
 sudo shutdown -h now          //-> halt the system now instead of the default in 1 minute
+
+sudo shutdown -c				      //-> to cancel the previously set shutdown
 
 sudo shutdown -r              //-> shutdown and reboot
 ```
@@ -124,13 +123,3 @@ journalctl --since "2021-09-22"
 
 journalctl -b  //-> since last boot
 ```
-
-
-## 5. Terminal multiplexer
-When connecting remotely via ssh the connection can be interrupted. By itself this is not a big issue. But when a shell is terminated all programs that were running in that shell are also interrupted. When doing important updates remotely an interruption can thus leave the system in a broken state.
-
-The mitigate this risk a terminal multiplexer is used via the command `tmux`. This opens up a virtual session on the server machine to which you can connect and disconnect at will. Thus when the connection is lost, the session continues and you can reattach to the existing session after re-connecting using the command `tmux attach`.
-
-Tmux is also useful to allow you to disconnect when you know a process will take a lot of time to complete.
-
-Screen is a similar application that allows you to do multitasking via the command line.

@@ -105,3 +105,8 @@ locate <file>
 locate <part-of-file>
 ```
 Note that locate needs a database that may need to be updated. Usually linux does this once a day by itself, depending on the distro. To update manually: `sudo updatedb`
+
+Find and delete files with specific name. In the example below we find and remove all files which name end with ':Zone.Identifier'
+```
+find . -type f -name '*:Zone.Identifier' -exec rm f '{}' \;
+```

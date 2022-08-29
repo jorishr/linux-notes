@@ -35,8 +35,7 @@ popd			//-> go back to previously stored folder
 Use the \ to escape characters in folders or files with spaces in them. Thus: `cd dir\ with\ spaces` brings you to 'dir with spaces'.
 * Execute binaries
 
-Commands are looked up in the bin directory /etc, but not in the current directory. If that is where you're executable is located you have to add ./
-`./<file.exe>`
+Commands are looked up in the /bin directory, but not in the current directory. If that is where you're executable is located you have to add a dot and slash: `./<file.exe>`
 * Help and manual pages
 ```
 whatis <command>
