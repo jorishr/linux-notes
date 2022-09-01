@@ -68,7 +68,7 @@ This is the system folder. It is created every time the systems boots and is use
 A temporary folder where application can stored temporary data.
 
 ## /usr
-User application folder. These are not essential apps that can be reside in the subfolders such as /usr/bin or /usr/local
+User application folder. These are not essential apps that can be reside in the sub folders such as /usr/bin or /usr/local
 
 ## /var 
 Contains files and folders that are expected to grow in size. For example, log files.

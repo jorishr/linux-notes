@@ -23,6 +23,6 @@ scp <localFile> <user>@<serverIP>:~/serverFolder
 Synchronize local and remote folder
 rsync -av . <usr>@<domain>:~/<serverDestFolder>
 
-Delete a file and run rsync again, and it only copies the one mising file.
+Delete a file and run rsync again, and it only copies the one missing file.
 
 [SSH Cheat Sheet](https://gist.github.com/bradtraversy/f03df587f2323b50beb4250520089a9e)

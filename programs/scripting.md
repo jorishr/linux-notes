@@ -36,7 +36,7 @@ Show all existing aliases in the command line:
 ## 3. Variables
 - Create a new variable
 ```
-<VARNAME>=value		
+<VAR NAME>=value		
 MYNAME=Joris
 
 echo $MYNAME	//-> Joris

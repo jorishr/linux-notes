@@ -13,7 +13,7 @@
 1. Apache server
 - install
 `sudo apt-get install apache2`
-- webroot location: `var/www/html`
+- web root location: `var/www/html`
 - test with an index.html file in browser: `localhost/index.html`
 
 2. PHP

@@ -43,7 +43,7 @@ The certbot package we installed takes care of this for us by adding a renew scr
 To test it: `sudo certbot renew --dry-run`
 
 ### Expanding or editing existing certificate
-To add a domain (sub domain or toplevel) to an existing certificate use: `certbot --expand -d existing.com,example.com,newdomain.com`. 
+To add a domain (sub domain or top level) to an existing certificate use: `certbot --expand -d existing.com,example.com,newdomain.com`. 
 
 To have full control over changes, including delete, use: `certbot --cert-name -d existing.com,example.com,newdomain.com`. 
 

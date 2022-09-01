@@ -10,36 +10,36 @@ Table of contents
 
 ## 1. List
 * List files and folders
-```
+```bash 
 ls
-ls -l					//-> list files with properties
-ls -a					//-> show all files, incl. hidden
-ls <otherFolder>		//-> shows the content of direct subfolders
+ls -l					# -> list files with properties
+ls -a					# -> show all files, incl. hidden
+ls <otherFolder>		# -> shows the content of direct sub folders
 
-ls -r					//-> reverse alphabetical order
-ls -l *.doc				//-> list all doc files
+ls -r					# -> reverse alphabetical order
+ls -l *.doc				# -> list all doc files
 ```
 * Get disk usage
-```
-du <folder>				//-> disk usage in mb of a folder and subfolders
-du -sh					//-> summarize (without subfolders), human readable (in kb/mb)
-du ~ -sh				//-> disk usage of home folder
+```bash
+du <folder>		# -> disk usage in mb of a folder and sub folders
+du -sh				# -> summarize (without sub folders), human readable (in kb/mb)
+du ~ -sh			# -> disk usage of home folder
 ```
 
 ## 2. View / Edit files 
-```
-nano	<file>		//-> open in file editor
+```bash
+nano	<file>		# -> open in file editor
 
-cat <file>			//-> read content of file in terminal
+cat <file>			# -> read content of file in terminal
 
-cat file1 file2		//-> concatenate both file contents
+cat file1 file2		# -> concatenate both file contents
 
 less <fileName>		
-//-> for long text files, enables pageUp/Down, use space bar, search for text etc.
+# -> for long text files, enables pageUp/Down, use space bar, search for text etc.
 
-dif <file> <file>	//-> compare content of two files
+dif <file> <file>	# -> compare content of two files
 
-tail -f <file>		//-> shows the end of a files content and will show additional lines in real-time, ideal for following log files.
+tail -f <file>		# -> shows the end of a files content and will show additional lines in real-time, ideal for following log files.
 ```
 
 ## 3. Find / locate files
@@ -77,16 +77,16 @@ Examples:
 
 ## 4. Grep
 Search for or filter strings of text inside files.
-```
+```bash
 grep "str" <filename> <filename> <filename>
 grep "function" main.js secondary.js third.js
 ```
 Arguments: -i -n ./* to remove case sensitivity, to display the line number the string was found and to look into all files
-```
+```bash
 grep -n -i "function" ./*
 
-grep "string1\|string2"			//-> search for multiple strings
-grep "string" /etc -r			//-> include files in subfolders 
+grep "string1\|string2"		# -> search for multiple strings
+grep "string" /etc -r		# -> include files in sub folders 
 
-cat system.log | grep error		//-> find all errors inside a log file
+cat system.log | grep error	# -> find all errors inside a log file
 ```

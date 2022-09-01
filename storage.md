@@ -12,7 +12,7 @@ table of contents
   - [Redundant storage options](#redundant-storage-options)
 
 ## Get info
-```
+```bash
 # Check free disk space (all file systems, human readable):
 df -ah
 
@@ -25,7 +25,7 @@ The loop file systems that Snap uses can be ignored. What matters are the Serial
 One disk can have multiple partitions.
 
 To identify the specific model of any disk, fetch the businfo via the List Hardware command and limit the output to the Disk category:
-```
+```bash
 sudo lshw -businfo -c disk
 ```
 ## Configuring a disk
@@ -34,15 +34,15 @@ It is recommended to use separate partitions for the system files and storage fo
 The steps are as follows: create partition(s); within a partition create a filesystem; setup permission in the filesystem.
 
 ### Create partitions with FDISK
-```
-sudo fdisk /dev/sda     //-> or /dev/sdb; double check you are working with the correct disk
+```bash
+sudo fdisk /dev/sda     # -> or /dev/sdb; double check you are working with the correct disk
 ```
 Inside the fdisk program check the commands and instructions. Note that modifying partition tables is a destructive operation. So is creating a new file system.
 
 ### Create a file system
 The ext4 is a recommended file system for server storage. 
-```
-sudo mkfs.ext4 /dev/sda1        //-> double check the correct partition
+```bash
+sudo mkfs.ext4 /dev/sda1  # -> double check the correct partition
 
 # The newly created file system needs to be attached to the root filesystem at some location by mounting the partition. Recommended is to use the /mnt/ folder.
 
@@ -51,7 +51,7 @@ sudo mount /dev/sda1 /mnt/storage
 ```
 ### Setup user permission for new file system
 By default only root has the permission to modify the files. Add all users through the `chmod` command. By doing so all users can read, write and modify the files that belong to them.
-```
+```bash
 sudo chmod 777 /mnt/storage  
 ```
 
@@ -61,7 +61,7 @@ The file system table FSTAB is responsible for the automatic mount at boot.
 
 ## Monitor file storage activity
 A program that can be used is `iotop` and can be used in combination with `sysstat/iostat`. The programs monitor input-output activity on devices.
-```
+```bash
 sudo apt install iotop
 
 sudo apt install sysstat
@@ -69,7 +69,7 @@ sudo apt install sysstat
 sudo iostat -h
 
 sudo hdparm -tTv /dev/sda
-//-> checks the read/write speed of the volume
+# -> checks the read/write speed of the volume
 ```
 
 ## Redundant storage options

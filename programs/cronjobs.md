@@ -21,3 +21,5 @@ To have it run every day: use *
 Every day at 12h00 run the ls command: 
 	
 `0 12 * * * ls > output.txt` 
+
+You can use online tools such cron guru to help you configure cronjobs.

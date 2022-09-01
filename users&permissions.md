@@ -11,32 +11,32 @@ Table of contents
 `id`
 
 * Add or delete a new user
-```
-adduser <username> 	//-> follow the steps
+```bash
+adduser <username> 	# -> follow the steps
 deluser <username>
 ```
 * Switch to other user: `su <otheruser>`
 
 * Add to or remove from group
-```
+```bash
 usermod -aG <group> <user>	
 usermod -aG sudo jorishr	
-//-> appends user to group sudo
+# -> appends user to group sudo
 
 deluser <user> <group>
-//-> need to login again to see effect
+# -> need to login again to see effect
 ```
 
 ## 2. File and directory permissions
 * See file/dir permissions: `ls -l`
-```
-TYPE 	OWNER(u)	GROUP(g)	OTHERS/PUBLIC(o)
--	rwx		rw		x
-d	rwx		rw		x
+```bash
+#TYPE 	OWNER(u)	GROUP(g)	OTHERS/PUBLIC(o)
+# - rwx		rw		x
+# d	rwx		rw		x
 
-- for files
-d for directory
-p for named pipes
+# - for files
+# d for directory
+# p for named pipes
 ```
 Each group has three possible characters:
 r: read; w: write; x:execute
@@ -52,15 +52,15 @@ Directory
 - x: cd into the directory and access the files
 
 To change permission:
-```
+```bash
 chmod <u/g/o/a>+r/w/x <file>		
-//-> add permission to file
+# -> add permission to file
 
 chmod <u/g/o/a>-r/w/x <file>		
-//-> remove file permissions
+# -> remove file permissions
 
 chmod a+r file.txt		
-//-> add read permission for all users
+# -> add read permission for all users
 ```
 
 Shortcut: use the number codes for each u/g/o
@@ -69,25 +69,25 @@ Shortcut: use the number codes for each u/g/o
 1 - execute
 2 - write
 4 - read
-```
+```bash
 chmod 750 <file>
-//-> user: 7 = 4 + 2 + 1
-//-> group: 5 = 4 + 1
-//-> other: 0, access denied
+# -> user: 7 = 4 + 2 + 1
+# -> group: 5 = 4 + 1
+# -> other: 0, access denied
 ```
 General guidelines for folders: 755; files: 644;
 
 NOTE: the 7,6,5,4,3,2,1 are converted into binary whereby:
-```
-r	w	x
-4	2	1	-> base 2
-1	1	1	-> 7
-1	1	0	-> 6
-1	0	1	-> 5
-1	0	0	-> 4
-0	1	1	-> 3
-0	1	0	-> 2
-0	0	1	-> 1
+```bash
+# r	w	x
+# 4	2	1	-> base 2
+# 1	1	1	-> 7
+# 1	1	0	-> 6
+# 1	0	1	-> 5
+# 1	0	0	-> 4
+# 0	1	1	-> 3
+# 0	1	0	-> 2
+# 0	0	1	-> 1
 ```
 This is repeated for each group (owner, group, others).	
 	
@@ -105,7 +105,7 @@ ROOT has full permissions on all files and directories regardless of the user/gr
 
 ## 3. File Attributes
 See/change file attributes: 
-```
+```bash
 lsattr -l
 chattrr +a/i/s
 chattrr -a/i/s

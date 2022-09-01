@@ -13,7 +13,7 @@ apt-cache search --names-only ^php
 apt-cache policy <name>
 //-> check installed version of an application
 
-apt show <name> //-> show package detailled info
+apt show <name> //-> show package detailed info
 
 which <program>
 //-> find the path where the program is installed

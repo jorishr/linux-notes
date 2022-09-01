@@ -33,7 +33,7 @@ The public key is put onto the server in the folder ~/.ssh/authorized_keys
 
 NOTES
 - Every key that is added is linked to the specific user. Thus if you start out in setup with root user, you will have to repeat the process of adding the public key to other users you create.
-- knownhosts: a configfile that contains the ip's or mac addresses of known hosts that are allowed to login
+- knownhosts: a config file that contains the ip's or mac addresses of known hosts that are allowed to login
 - On remote servers or windows you may have to activate the authentication client to manage passwords attached to ssh keys:
 ```
 eval `ssh-agent -s`

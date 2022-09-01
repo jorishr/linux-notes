@@ -10,11 +10,11 @@ Table of contents
 mkdir <name>
 mkdir -p nesting/more/directories	
 ```
-Create two subfolders and in each subfolder it also create three subfolders
+Create two sub folders and in each subfolder it also create three sub folders
 ```
 mkdir -p folder/{sub1,sub2}/{sub1,sub2,sub3}
 ```
-Example: hundred subfolders with each 10 subfolders inside
+Example: hundred sub folders with each 10 sub folders inside
 ```
 mkdir -p folder/{1..100}/{1..10}
 ```
@@ -36,10 +36,10 @@ mv <map1> <map2> <destPath>
 cp <map> <destPath>
 
 cp -R * /new/absolute/path	
-//-> copy CURRENT folder including all files and subfolders to a new folder. -R is recursion
+//-> copy CURRENT folder including all files and sub folders to a new folder. -R is recursion
 
 cp -R test/dir1/* test/dir2		
-//-> copy CONTENT: all files and subfolders inside dir1 to dir2
+//-> copy CONTENT: all files and sub folders inside dir1 to dir2
 ```
 
 ## 2. File Operations
@@ -47,7 +47,7 @@ cp -R test/dir1/* test/dir2
 
 Note: touch a file to update the date of last change.
 ```
-touch <newfile.extension>		//-> create new file
+touch <new file.extension>		//-> create new file
 touch index.html	
 
 touch app/assets/css/main.css	

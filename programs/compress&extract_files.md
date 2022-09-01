@@ -7,7 +7,7 @@ gunzip <file>       //-> decompress content of .gz file
 - archive multiple files using tar program:
 ```
 tar -czvf <name>.tar <file1> <file2> <file3>
-//-> c: create; z: use zip format; v: verbose output in terminal; filetype
+//-> c: create; z: use zip format; v: verbose output in terminal; file type
 
 tar -czvf archive.tar *
 //-> to add all files inside the folder to the archive 

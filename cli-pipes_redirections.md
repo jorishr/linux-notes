@@ -1,9 +1,9 @@
-# Linux CLI: Pipes and Redirections
+# Linux CLI: Pipes and Re-directions
 Table of contents 
-- [Linux CLI: Pipes and Redirections](#linux-cli-pipes-and-redirections)
+- [Linux CLI: Pipes and Re-directions](#linux-cli-pipes-and-re-directions)
   - [1.   File descriptors](#1---file-descriptors)
   - [2.   Pipes](#2---pipes)
-  - [3.   Redirections](#3---redirections)
+  - [3.   Re-directions](#3---re-directions)
 
 ## 1.   File descriptors
 When a program wants to read or write a file it needs to request access to that file from the kernel. The kernel assigns three files descriptors to the program by default:
@@ -19,8 +19,8 @@ Stdout and stderr both produce output (program data or error message) into the t
 Run program1 and send stdout to stdin of program2 with anonymous pipe:
 `program1 | program2`
 
-## 3.   Redirections
-Pipes operate on the stdout of a program while redirections can be done with both input and output.
+## 3.   Re-directions
+Pipes operate on the stdout of a program while re-directions can be done with both input and output.
 
 * ### Output Redirection
 Run program1 and redirect stdout to log file, stderr goes to the terminal by default:
