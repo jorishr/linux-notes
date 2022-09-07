@@ -12,10 +12,11 @@ Table of contents
 	- [Nginx Reverse Proxy](#nginx-reverse-proxy)
 		- [NodeJS app](#nodejs-app)
 		- [X-REAL-IP/X-FORWARDED-FOR](#x-real-ipx-forwarded-for)
-	- [Configure SSL and HTTP/2](#configure-ssl-and-http2)
 	- [Optimize Nginx for performance](#optimize-nginx-for-performance)
 	- [PHP and Nginx](#php-and-nginx)
 	- [Nginx as a load balancer](#nginx-as-a-load-balancer)
+	- [Configure SSL and HTTP/2](#configure-ssl-and-http2)
+		- [HTTP/2 Server Push](#http2-server-push)
 
 References: 
 - [Install Nginx on Ubuntu](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-18-04)
@@ -145,11 +146,62 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 ```
 The forwarded-for will contain all the possible intermediate ip addresses of the proxy servers that the requests passed through.
 
-## Configure SSL and HTTP/2
-
 ## Optimize Nginx for performance
+- The number *worker processes* can be adjusted according to the number of cpu core you have available on the server. If there is only one, no changes are need. But if you have 4 cores available (check `nproc` or ``lscpu`) configure additional worker processes in the `/etc/nginx/nginx.conf`. Set the value to `auto` to let Nginx auto-detect changes.
 
+- The number of *worker connections* is the highest number of connections a single worker process can handle. This number is related to the number of your CPU core's and the number of files your operating system is allowed to open per core. Check `ulimit -n`. This is also a global nginx setting that can be configured inside the events context with the following directive: `events { worker_connections 1024; }`
+
+- *Compress responses* by configuring the gzip settings in the http context. By default, NGINX compresses HTML responses. To compress other file formats, you'll have to pass them as parameters to the `gzip_types` directive. Configuring compression in NGINX is not enough, however. The client has to ask for the compressed response instead of the uncompressed responses. See the `add_header Vary Accept-Encoding;` in the section below on caching. The gzip compression can be very substantial so it's worth configuring this option for faster load times. 
+   
+- *Caching static content* is best done per server block because the type of content being served may be different. A regular expression can be used to target all files that end with a specific extension.
+```bash
+location ~* \.(css|js|jpg|webp)$ {
+	#access_log off;
+	
+	#add_header Pragma public;	# legacy that does the same thing as Cache-Control
+	add_header Cache-Control public;	
+	# tells the client that this content can be cached in any way
+	add_header Vary Accept-Encoding;	
+	# tells the client (browser) to expect different (sized) responses based on the type of request (e.g. compressed or not)
+	expires 1M; # clear cache every month; 24h (hours) or 10m (minutes) 
+```
 ## PHP and Nginx
 See [PHP With NGINX](https://www.freecodecamp.org/news/the-nginx-handbook/#php-with-nginx))
 
 ## Nginx as a load balancer
+Load balancing is a much broader topic and usually involves multiple servers. However, if you run various NodeJS applications on the same server Nginx may be configured to distribute the load between them automatically. To do so you can add an *upstream* context block to the server configuration:
+```bash
+http {
+
+    upstream backend_servers {
+        server localhost:3001;	# nodejs 1
+        server localhost:3002;	# nodejs 2
+        server localhost:3003;	# nodejs 3
+    }
+
+    server {
+
+        listen 80;
+        server_name example.com;
+
+        location / {
+            proxy_pass http://backend_servers;
+			# all traffic is passed on to the backend_servers upstream
+        }
+    }
+}
+```
+## Configure SSL and HTTP/2
+For the HTTP/2 to work correctly you need a SSL certificate first.
+
+The http/2 package is usually included in the default package on the Ubuntu repo. Simply update the server block settings managed by Certbot:
+```bash
+    listen [::]:443 ssl http2 ipv6only=on; 
+    listen 443 ssl http2; 
+``` 
+Note: When upgrading from HTTP 1.1 on an existing Certbot generated certificate, problems may arise with the encryption ciphers. See [Nginx with HTTP/2 setup](https://www.digitalocean.com/community/tutorials/how-to-set-up-nginx-with-http-2-support-on-ubuntu-18-04)
+
+Check the configuration: `curl -I -L https://your_domain`
+
+### HTTP/2 Server Push
+HTTP/2 unlocks additional configuration options like *server push* that can further reduce loading times. See [Nginx Server Push](https://www.nginx.com/blog/nginx-1-13-9-http2-server-push/)
