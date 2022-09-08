@@ -6,6 +6,7 @@ Table of contents
     - [Obtain the certificate](#obtain-the-certificate)
     - [Auto-renewal](#auto-renewal)
     - [Expanding or editing existing certificate](#expanding-or-editing-existing-certificate)
+    - [Adding certificate for subdomain](#adding-certificate-for-subdomain)
   - [Adding a commercial certificate](#adding-a-commercial-certificate)
     - [Obtain certificate](#obtain-certificate)
     - [Setup in Nginx](#setup-in-nginx)
@@ -21,7 +22,7 @@ Specifically, it does this by looking for a `server_name` directive that matches
 Find the server name in your `sites-available` config file.
 
 Update the firewall settings.
-```
+```bash
 sudo add-apt-repository ppa:certbot/certbot
 
 sudo apt install python-certbot-nginx
@@ -47,11 +48,13 @@ To add a domain (sub domain or top level) to an existing certificate use: `certb
 
 To have full control over changes, including delete, use: `certbot --cert-name -d existing.com,example.com,newdomain.com`. 
 
+### Adding certificate for subdomain
+The first option is to expand the existing certificate for the root domain with each subdomain in a manual process. You can however add support for all subdomains at onces, see [Wildcard Certification with Certbot](https://www.digitalocean.com/community/tutorials/how-to-create-let-s-encrypt-wildcard-certificates-with-certbot).
 ## Adding a commercial certificate
 ### Obtain certificate
-Create a PRIVATE KEY through third party certificate issuing website. 
+Create a *private key* through third party certificate issuing website. 
 
-NOTE: use the full domain `www.mywebsite.com`
+Note: use the full domain `www.mywebsite.com`
 
 Create a private key file.
 
@@ -62,7 +65,7 @@ Create a bundle file with, in order:
 
 ### Setup in Nginx
 In `site-available` you have the path for the bundle and the private key.
-```
+```bash
 ssl_certificate -> /etc/ssl/private/ssl-bundle.crt;
 
 ssl_certificate_key -> /etc/ssl/private/<name>.key;
