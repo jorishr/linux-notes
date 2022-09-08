@@ -13,6 +13,8 @@ Table of contents
 		- [NodeJS app](#nodejs-app)
 		- [X-REAL-IP/X-FORWARDED-FOR](#x-real-ipx-forwarded-for)
 	- [Optimize Nginx for performance](#optimize-nginx-for-performance)
+		- [Header security](#header-security)
+		- [DDOS protection](#ddos-protection)
 	- [PHP and Nginx](#php-and-nginx)
 	- [Nginx as a load balancer](#nginx-as-a-load-balancer)
 	- [Configure SSL and HTTP/2](#configure-ssl-and-http2)
@@ -131,7 +133,8 @@ The NodeJS server is usually running on a port of the localHost. Thus the idea i
 ```bash
 location / {
 	proxy_pass http://localhost:3000;
-	proxy_http_version 1.1; # default is 1.0; websocket requires 1.1
+	proxy_http_version 1.1; 
+	# default is 1.0; websocket requires 1.1; no need/support for http2
 	proxy_set_header Host $host
 	proxy_set_header Upgrade $http_upgrade; 
 	proxy_set_header Connection 'upgrade';
@@ -165,6 +168,33 @@ location ~* \.(css|js|jpg|webp)$ {
 	# tells the client (browser) to expect different (sized) responses based on the type of request (e.g. compressed or not)
 	expires 1M; # clear cache every month; 24h (hours) or 10m (minutes) 
 ```
+```bash
+	gzip on;
+
+	gzip_vary on;
+	gzip_proxied any;
+	gzip_disable "msie6";
+	gzip_comp_level 4;
+	gzip_buffers 32 8k;
+	gzip_min_length 250;
+	gzip_http_version 1.1;
+	gzip_types image/jpeg image/bmp image/svg+xml text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript image/x-icon;
+```
+### Header security
+These are basic protections against the most common attacks like click-jacking or cors attacks. See [Nginx Improvements](https://www.freecodecamp.org/news/powerful-ways-to-supercharge-your-nginx-server-and-improve-its-performance-a8afdbfde64d/)
+```bash
+add_header X-Frame-Options "SAMEORIGIN" always;
+add_header X-XSS-Protection "1; mode=block" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "no-referrer-when-downgrade" always;
+add_header Content-Security-Policy "default-src * data: 'unsafe-eval' 'unsafe-inline'" always;
+add_header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload" always;
+```
+### DDOS protection
+DDOS protection requires a layered approach and you're not going to fight off an attack by tweaking the configuration files. However, you can implement some minimal protection via rate and connection limits or by dropping slow connections.
+
+See [Mitigating DDOS](https://www.nginx.com/blog/mitigating-ddos-attacks-with-nginx-and-nginx-plus/)
+
 ## PHP and Nginx
 See [PHP With NGINX](https://www.freecodecamp.org/news/the-nginx-handbook/#php-with-nginx))
 
@@ -203,5 +233,33 @@ Note: When upgrading from HTTP 1.1 on an existing Certbot generated certificate,
 
 Check the configuration: `curl -I -L https://your_domain`
 
+SSL/TLS is a broad topic. But the standard Nginx settings are not good enough. TLSv1.3 and TLSv1.2 are the current standard (2022) and everything below should only be considered because of legacy support. To obtain the an A or A+ score via benchmark tools consider the following optimizations in the `nginx.conf`:
+```bash
+##
+# SSL Settings
+##
+
+ssl_protocols TLSv1.3 TLSv1.2;
+
+ssl_prefer_server_ciphers on;
+ssl_dhparam dhparam.pem;				# generate on server
+ssl_ciphers EECDH+AESGCM:EDH+AESGCM;	# cipher is always changing; look up the latest
+
+ssl_ecdh_curve secp384r1;
+
+ssl_stapling on;
+ssl_stapling_verify on;
+
+ssl_session_timeout  10m;
+ssl_session_cache shared:SSL:10m;
+ssl_session_tickets off;
+```
+The key-exchange key should be generated on the server and might take a while: `openssl dhparam -out /etc/nginx/ssl/dhparam.pem 4096`.
+
+*SSL Stapling* doesn't make the server more secure, but it does help the client by telling them they can use your server for OCSP information for your domain instead of letting the browser make the request to an often unreliable resource.
+
+References:
+- [Cipher list](https://cipherlist.eu/)
+- [Nginx Admin's Handbook](https://github.com/trimstray/nginx-admins-handbook#prologue)
 ### HTTP/2 Server Push
 HTTP/2 unlocks additional configuration options like *server push* that can further reduce loading times. See [Nginx Server Push](https://www.nginx.com/blog/nginx-1-13-9-http2-server-push/)
