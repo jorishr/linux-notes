@@ -41,4 +41,10 @@ A test via the Tor browser should work now but their may be issues when you make
 curl -v --socks5-hostname localhost:9050 http://<onion-url>
 ```
 ## Vanity onion address
-TBD
+Finding an address that start with a *human readable string* is a brute force process that has a significant cost in terms of computing power. For example, it took my old business laptop from 2008 two full days to find three onion addresses starting with 'liondig'. Running at max capacity for two days. Modern cpu's will be faster and better but it's still a random guessing exercise.
+
+Follow the instruction links via the Tor Project website. Compile the mining program and configure a number of filters in a file. It's important to think in advance of possible combination you are willing to accept. My hope was to get to 'liondgts' but that was too much to ask for, so I settled on 'liondig'. I did get hundreds of results for 'liond' and some for 'liondi' but for each additional character it gets exponentially more difficult. Seven characters seems do-able on an old machine or raspberry pi.
+
+*Note:* since this program is going to run for days on your linux machine, use a terminal multiplexer like `tmux` to put this process into a shell that you can attach to and from at will.
+- [Vanity Addresses](https://community.torproject.org/onion-services/advanced/vanity-addresses/)
+- [mkp224o](https://github.com/cathugger/mkp224o#faq-and-other-useful-info)
