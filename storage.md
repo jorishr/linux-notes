@@ -7,6 +7,8 @@ table of contents
     - [Create partitions with FDISK](#create-partitions-with-fdisk)
     - [Create a file system](#create-a-file-system)
     - [Setup user permission for new file system](#setup-user-permission-for-new-file-system)
+    - [Mount a Windows NTFS Disk in linux](#mount-a-windows-ntfs-disk-in-linux)
+    - [Mount a Windows formatted USB stick](#mount-a-windows-formatted-usb-stick)
   - [Automatically mount devices](#automatically-mount-devices)
   - [Monitor file storage activity](#monitor-file-storage-activity)
   - [Redundant storage options](#redundant-storage-options)
@@ -54,7 +56,21 @@ By default only root has the permission to modify the files. Add all users throu
 ```bash
 sudo chmod 777 /mnt/storage  
 ```
+### Mount a Windows NTFS Disk in linux
+See instructions [Mounting Windows Partitions](https://help.ubuntu.com/community/MountingWindowsPartitions)
+### Mount a Windows formatted USB stick
+Some USB devices are formatted with NTFS file system others with FAT.
+```bash
+# mount
+mkdir /media/<disk label>  
 
+sudo mount -t vfat /dev/sdc1 /media/<disk label>
+sudo mount -t ntfs-3g /dev/sdc1 /media/<disk label>
+
+#unmount
+umount /media/<disk label>
+# or umount /dev/sdc1
+```
 ## Automatically mount devices
 The file system table FSTAB is responsible for the automatic mount at boot. 
 `/etc/fstab` is a configuration file that can be edited to adjust the options. Using the partition identifier is not a good choice because this might change due to detection order changes. Better to include the Universally Unique Identifier (UUID) that can be fetched and copied from `blkid`. Thus use: `/dev/disk/by-uuid/<uuid>`. Add the `nofail` options for USB drives so that the system can continue even if the USB fails.
