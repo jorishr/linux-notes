@@ -2,7 +2,7 @@
 
 table of contents
 - [Storage](#storage)
-  - [Get info](#get-info)
+  - [Get disk usage info](#get-disk-usage-info)
   - [Configuring a disk](#configuring-a-disk)
     - [Create partitions with FDISK](#create-partitions-with-fdisk)
     - [Create a file system](#create-a-file-system)
@@ -13,10 +13,14 @@ table of contents
   - [Monitor file storage activity](#monitor-file-storage-activity)
   - [Redundant storage options](#redundant-storage-options)
 
-## Get info
+## Get disk usage info
 ```bash
 # Check free disk space (all file systems, human readable):
 df -ah
+
+du <folder>		# -> disk usage in mb of a folder and sub folders
+du -sh				# -> summarize (without sub folders), human readable (in kb/mb)
+du ~ -sh			# -> disk usage of home folder
 
 # List all mounted devices (uuid of all drives and partitions): 
 lsblk
